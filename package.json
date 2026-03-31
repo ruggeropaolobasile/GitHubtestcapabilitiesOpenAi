@@ -1,0 +1,11 @@
+{
+  "name": "github-test-capabilities-openai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sandbox repo for testing GitHub connector capabilities with OpenAI/ChatGPT.",
+  "main": "examples/node/sample-api.js",
+  "scripts": {
+    "start": "node examples/node/sample-api.js",
+    "health": "node -e \"const { buildResponse } = require('./examples/node/sample-api'); console.log(buildResponse('/health'));\""
+  }
+}
