@@ -1,0 +1,31 @@
+name: Capagross Drive bootstrap syntax
+on:
+  push:
+    branches:
+      - feat/capagross-rx18-drive-bootstrap-20261110
+    paths:
+      - scripts/Capagross-RX18-Drive-Bootstrap.ps1
+      - .github/workflows/capagross-bootstrap-parse.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  parse:
+    runs-on: windows-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Windows PowerShell 5.1 syntax
+        shell: powershell
+        run: |
+          $tokens = $null
+          $errors = $null
+          [void][System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path 'scripts/Capagross-RX18-Drive-Bootstrap.ps1').Path,
+            [ref]$tokens, [ref]$errors
+          )
+          if ($errors.Count) {
+            $errors | ForEach-Object { Write-Error $_.Message }
+            exit 1
+          }
+          Write-Host "BOOTSTRAP-PS1-SYNTAX-OK"
