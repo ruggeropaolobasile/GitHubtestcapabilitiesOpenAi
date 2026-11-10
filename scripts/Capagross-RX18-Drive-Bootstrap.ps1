@@ -16,7 +16,7 @@ $transcript = $false
 try {
     Start-Transcript -Path $log -Force | Out-Null
     $transcript = $true
-    Write-Host ("BOOTSTRAP RX18 — log: " + $log) -ForegroundColor Cyan
+    Write-Host ("BOOTSTRAP RX18 - log: " + $log) -ForegroundColor Cyan
     $verified = $false
     if (Test-Path $script -PathType Leaf) {
         $verified = ((Get-FileHash -LiteralPath $script -Algorithm SHA256).Hash -eq $expected)
